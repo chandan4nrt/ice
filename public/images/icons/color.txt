@@ -1,0 +1,7 @@
+background- 	#0a1322
+box bg- 	#131c2b
+green color- 	#89d389
+yellow color- 	#ccd569
+orange		#d5aa4d
+red		#e0acac
+blue		#112547
