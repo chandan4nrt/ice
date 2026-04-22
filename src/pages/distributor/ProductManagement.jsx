@@ -176,52 +176,46 @@ const ProductManagement = () => {
 
             {/* List Section */}
             <div className="darkbox" style={{ marginTop: '40px' }}>
-                <h3 style={{ marginBottom: '20px' }}>Inventory Catalog</h3>
-                {loadingProducts ? (
-                    <div style={{ textAlign: 'center', padding: '40px', color: 'var(--gray)' }}>Loading Catalog...</div>
-                ) : (
-                    <div className="table-responsive">
-                        <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--white)' }}>
-                            <thead>
-                                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', textAlign: 'left' }}>
-                                    <th style={{ padding: '12px' }}>Product</th>
-                                    <th style={{ padding: '12px' }}>Description</th>
-                                    <th style={{ padding: '12px' }}>Unit</th>
-                                    <th style={{ padding: '12px' }}>MRP</th>
-                                    <th style={{ padding: '12px' }}>Actions</th>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                    <h3 style={{ margin: 0 }}>Inventory Catalog</h3>
+                    {loadingProducts && <span style={{ fontSize: '12px', color: 'var(--yellow)' }}>Syncing Catalog...</span>}
+                </div>
+                <div className="table-responsive">
+                    <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--white)' }}>
+                        <thead>
+                            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', textAlign: 'left' }}>
+                                <th style={{ padding: '12px' }}>Product</th>
+                                <th style={{ padding: '12px' }}>Description</th>
+                                <th style={{ padding: '12px' }}>Unit</th>
+                                <th style={{ padding: '12px' }}>MRP</th>
+                                <th style={{ padding: '12px' }}>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {displayProducts?.map((item) => (
+                                <tr key={item.productId} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                                    <td style={{ padding: '12px' }}>
+                                        <div style={{ fontWeight: 'bold' }}>{item.name}</div>
+                                        <div style={{ fontSize: '11px', color: 'var(--yellow)' }}>ID: {item.productId}</div>
+                                    </td>
+                                    <td style={{ padding: '12px', fontSize: '13px', color: 'var(--gray)', maxWidth: '300px' }}>
+                                        {item.description}
+                                    </td>
+                                    <td style={{ padding: '12px' }}>{item.unit}</td>
+                                    <td style={{ padding: '12px', fontWeight: 'bold' }}>₹{item.mrp}</td>
+                                    <td style={{ padding: '12px' }}>
+                                        <button 
+                                            style={{ background: 'rgba(255,255,255,0.1)', color: 'var(--white)', padding: '5px 12px', borderRadius: '4px', cursor: 'pointer' }}
+                                            onClick={() => setEditingProduct(item)}
+                                        >
+                                            Edit
+                                        </button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {displayProducts?.map((item) => (
-                                    <tr key={item.productId} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                                        <td style={{ padding: '12px' }}>
-                                            <div style={{ fontWeight: 'bold' }}>{item.name}</div>
-                                            <div style={{ fontSize: '11px', color: 'var(--yellow)' }}>ID: {item.productId}</div>
-                                        </td>
-                                        <td style={{ padding: '12px', fontSize: '13px', color: 'var(--gray)', maxWidth: '300px' }}>
-                                            {item.description}
-                                        </td>
-                                        <td style={{ padding: '12px' }}>{item.unit}</td>
-                                        <td style={{ padding: '12px', fontWeight: 'bold' }}>₹{item.mrp}</td>
-                                        <td style={{ padding: '12px' }}>
-                                            <button 
-                                                style={{ background: 'rgba(255,255,255,0.1)', color: 'var(--white)', padding: '5px 12px', borderRadius: '4px', cursor: 'pointer' }}
-                                                onClick={() => setEditingProduct(item)}
-                                            >
-                                                Edit
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                                {(!products || products.length === 0) && (
-                                    <tr>
-                                        <td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: 'var(--gray)' }}>The catalog is currently empty.</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

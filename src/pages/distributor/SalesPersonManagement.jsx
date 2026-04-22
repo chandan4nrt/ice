@@ -170,25 +170,24 @@ const SalesPersonManagement = () => {
                 </form>
             </div>
 
-            {/* List Section */}
             <div className="darkbox" style={{ marginTop: '40px' }}>
-                <h3 style={{ marginBottom: '20px' }}>Active Sales Team</h3>
-                {loadingTeam ? (
-                    <div style={{ textAlign: 'center', padding: '40px', color: 'var(--gray)' }}>Loading Team Data...</div>
-                ) : (
-                    <div className="table-responsive">
-                        <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--white)' }}>
-                            <thead>
-                                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', textAlign: 'left' }}>
-                                    <th style={{ padding: '12px' }}>Name</th>
-                                    <th style={{ padding: '12px' }}>Contact Details</th>
-                                    <th style={{ padding: '12px' }}>Target</th>
-                                    <th style={{ padding: '12px' }}>Status</th>
-                                    <th style={{ padding: '12px' }}>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {displayPersons?.map((item) => (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                    <h3 style={{ margin: 0 }}>Active Sales Team</h3>
+                    {loadingTeam && <span style={{ fontSize: '12px', color: 'var(--yellow)' }}>Syncing...</span>}
+                </div>
+                <div className="table-responsive">
+                    <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--white)' }}>
+                        <thead>
+                            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', textAlign: 'left' }}>
+                                <th style={{ padding: '12px' }}>Name</th>
+                                <th style={{ padding: '12px' }}>Contact Details</th>
+                                <th style={{ padding: '12px' }}>Target</th>
+                                <th style={{ padding: '12px' }}>Status</th>
+                                <th style={{ padding: '12px' }}>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {displayPersons?.map((item) => (
                                     <tr key={item.salesPersonId} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                                         <td style={{ padding: '12px', fontWeight: 'bold' }}>{item.name}</td>
                                         <td style={{ padding: '12px' }}>
@@ -224,8 +223,7 @@ const SalesPersonManagement = () => {
                                 )}
                             </tbody>
                         </table>
-                    </div>
-                )}
+                </div>
             </div>
         </div>
     );

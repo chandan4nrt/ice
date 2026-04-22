@@ -89,10 +89,10 @@ const DistributorDashboard = () => {
               <tbody>
                 {recentOrders.map((order) => (
                   <tr key={order.id}>
-                    <td style={{ fontWeight: 600, color: '#0f172a' }}>{order.id}</td>
+                    <td style={{ fontWeight: 600, color: '#ffffff' }}>{order.id}</td>
                     <td>{order.customer}</td>
                     <td style={{ color: '#94a3b8', fontSize: '0.875rem' }}>{order.date}</td>
-                    <td style={{ fontWeight: 700, color: '#0f172a' }}>{order.amount}</td>
+                    <td style={{ fontWeight: 700, color: '#ffffff' }}>{order.amount}</td>
                     <td>
                       <span className={`status-badge ${order.status.toLowerCase()}`}>
                         {order.status}

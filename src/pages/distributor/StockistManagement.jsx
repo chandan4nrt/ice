@@ -176,25 +176,24 @@ const StockistManagement = () => {
                 </form>
             </div>
 
-            {/* List Table Section */}
             <div className="darkbox" style={{ marginTop: '40px' }}>
-                <h3 style={{ marginBottom: '20px' }}>Active Stockist Directory</h3>
-                {isLoading ? (
-                    <div style={{ textAlign: 'center', padding: '40px', color: 'var(--gray)' }}>Loading Stockists...</div>
-                ) : (
-                    <div className="table-responsive">
-                        <table className="w-full" style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--white)' }}>
-                            <thead>
-                                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', textAlign: 'left' }}>
-                                    <th style={{ padding: '12px' }}>Stockist Name</th>
-                                    <th style={{ padding: '12px' }}>GST Details</th>
-                                    <th style={{ padding: '12px' }}>Contact</th>
-                                    <th style={{ padding: '12px' }}>Location</th>
-                                    <th style={{ padding: '12px' }}>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {displayStockists?.map((item) => (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                    <h3 style={{ margin: 0 }}>Active Stockist Directory</h3>
+                    {isLoading && <span style={{ fontSize: '12px', color: 'var(--yellow)' }}>Syncing with server...</span>}
+                </div>
+                <div className="table-responsive">
+                    <table className="w-full" style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--white)' }}>
+                        <thead>
+                            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', textAlign: 'left' }}>
+                                <th style={{ padding: '12px' }}>Stockist Name</th>
+                                <th style={{ padding: '12px' }}>GST Details</th>
+                                <th style={{ padding: '12px' }}>Contact</th>
+                                <th style={{ padding: '12px' }}>Location</th>
+                                <th style={{ padding: '12px' }}>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {displayStockists?.map((item) => (
                                     <tr key={item.stockistId} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                                         <td style={{ padding: '12px', fontWeight: 'bold' }}>{item.name}</td>
                                         <td style={{ padding: '12px' }}>{item.gstNumber}</td>
@@ -213,10 +212,9 @@ const StockistManagement = () => {
                                         </td>
                                     </tr>
                                 ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );
