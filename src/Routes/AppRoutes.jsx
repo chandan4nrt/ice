@@ -6,9 +6,10 @@ import ProtectedRoute from "./ProtectedRoute";
 import { useAuth } from "../context/AuthContext";
 import Unauthorized from "../pages/Unauthorized";
 import { componentMap } from "./ComponentMap";
-import { useGetRoutes, useGetSidebar } from "../services/auth.service";
-import { getRoleBasedRedirect, flattenMenu } from "../utills/helper";
+import { getRoleBasedRedirect } from "../utills/helper";
 import NotFound from "../pages/NoteFound";
+
+import { STATIC_ROUTES } from "./StaticRoutes";
 
 const renderDynamicRoutes = (routes) => {
   if (!routes) return []
@@ -16,7 +17,10 @@ const renderDynamicRoutes = (routes) => {
   return routes.map((route) => {
     const Component = componentMap[route.component];
 
-    if (!Component) return null;
+    if (!Component) {
+      console.warn(`Route component "${route.component}" not found in ComponentMap for path "${route.path}"`);
+      return null;
+    }
 
     return (
       <Route
@@ -25,19 +29,17 @@ const renderDynamicRoutes = (routes) => {
         element={<Component />}
       />
     );
-  });
+  }).filter(Boolean);
 };
 
 const AppRoutes = ({ logoUrl }) => {
-  const { user, loading } = useAuth();
-  const { data: dynamicRoutes } = useGetRoutes(user?.primaryRole);
-  const { data: menuItems } = useGetSidebar();
+  const { user, loading: authLoading } = useAuth();
+  const role = user?.primaryRole?.toUpperCase();
+  
+  // Exclusively using static routes
+  const finalRoutes = (role && STATIC_ROUTES[role]) ? STATIC_ROUTES[role] : [];
 
-  const finalRoutes = (dynamicRoutes && dynamicRoutes.length > 0)
-    ? dynamicRoutes
-    : (menuItems ? flattenMenu(menuItems) : []);
-
-  if (loading) {
+  if (authLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600" />
@@ -63,7 +65,7 @@ const AppRoutes = ({ logoUrl }) => {
       </Route>
 
       <Route index element={<Navigate to={getRoleBasedRedirect(user?.primaryRole)} replace />} />
-      {dynamicRoutes && <Route path="*" element={<ProtectedRoute allowedRoles={user?.roleCodes}><NotFound /></ProtectedRoute>} />}
+      <Route path="*" element={<ProtectedRoute allowedRoles={user?.roleCodes}><NotFound /></ProtectedRoute>} />
     </Routes>
   );
 };

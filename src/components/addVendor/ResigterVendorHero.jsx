@@ -21,7 +21,7 @@ import {
 import { useLoader } from "../../context/LoaderContext";
 import { useNotification } from "../../context/NotificationContext";
 
-const ResigterVendorHero = () => {
+const ResigterVendorHero = ({ children, standaloneMode = false }) => {
   const [step, setStep] = useState(0);
   const { showLoader, hideLoader } = useLoader();
   const { showNotification } = useNotification();
@@ -144,29 +144,35 @@ const ResigterVendorHero = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        {/* Render Step */}
-        {renderStep(step)}
-
-        {step > 4 ? (
-          <ReviewSubmit onEdit={setStep} showEdit={true} />
+        {children ? (
+          children
         ) : (
-          <div className="stepper-footer d-flex justify-content-between">
-            {step > 0 ? (
-              <button type="button" onClick={prev}>
-                Previous
-              </button>
-            ) : (
-              <div />
-            )}
+          <>
+            {/* Render Step */}
+            {renderStep(step)}
 
-            {step < 5 ? (
-              <button type="button" onClick={next}>
-                Next
-              </button>
+            {step > 4 ? (
+              <ReviewSubmit onEdit={setStep} showEdit={true} />
             ) : (
-              <button type="submit">Submit</button>
+              <div className="stepper-footer d-flex justify-content-between">
+                {step > 0 ? (
+                  <button type="button" onClick={prev}>
+                    Previous
+                  </button>
+                ) : (
+                  <div />
+                )}
+
+                {step < 5 ? (
+                  <button type="button" onClick={next}>
+                    Next
+                  </button>
+                ) : (
+                  <button type="submit">Submit</button>
+                )}
+              </div>
             )}
-          </div>
+          </>
         )}
       </form>
     </FormProvider>

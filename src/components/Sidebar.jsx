@@ -3,11 +3,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import "../css/Sidebar.css";
 import { useAuth } from "../context/AuthContext";
 import { ChevronRight } from "lucide-react";
-import { useGetSidebar } from "../services/auth.service";
+import { STATIC_ROUTES } from "../Routes/StaticRoutes";
 
 export default function Sidebar({ open, onClose }) {
   const { user, logout } = useAuth();
-  const { data: menuItems = [] } = useGetSidebar();
+
+  const roleString = user?.primaryRole?.toUpperCase();
+  const menuItems = (roleString && STATIC_ROUTES[roleString]) ? STATIC_ROUTES[roleString] : [];
 
   const [openMenus, setOpenMenus] = useState({});
   const location = useLocation();
