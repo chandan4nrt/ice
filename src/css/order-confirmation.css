@@ -1,0 +1,216 @@
+/* Base Layout */
+.oa-container {
+    background-color: #0f172a;
+    /* Deep dark blue background */
+    color: #f8fafc;
+    min-height: 100vh;
+    padding: 16px;
+    font-family: sans-serif;
+}
+
+.oa-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.header-text h1 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.header-text p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Card Styling */
+.oa-card {
+    margin-bottom: 20px;
+}
+
+.oa-card h3 {
+    font-size: 1rem;
+    color: #f8fafc;
+    margin-bottom: 12px;
+}
+
+.dark-table,
+.summary-box {
+    background-color: #1e293b;
+    /* Slightly lighter blue for cards */
+    border-radius: 12px;
+    padding: 16px;
+}
+
+/* Table Styles */
+.table-info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #64748b;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #334155;
+}
+
+.table-head {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    padding: 12px 0;
+}
+
+.table-head .col-stock,
+.table-head .col-qty {
+    text-align: center;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid #334155;
+    font-size: 0.9rem;
+}
+
+.col-stock,
+.col-qty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* Stepper UI */
+.qty-stepper {
+    display: flex;
+    align-items: center;
+    background: #334155;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.qty-stepper button {
+    background: #475569;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.qty-stepper span {
+    flex: 1;
+    text-align: center;
+    padding: 4px;
+}
+
+/* Summary */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    color: #cbd5e1;
+}
+
+.summary-row span {
+    color: #ffffff;
+    /* Bright white for labels and values */
+    font-weight: 500;
+}
+
+.summary-row .price-text {
+    color: #ffffff;
+    font-weight: 600;
+    /* Extra bold for the price */
+}
+
+/* If you want the labels slightly different but still bright */
+.summary-row span:first-child {
+    color: #e2e8f0;
+    /* Very light silver/white */
+}
+
+.oa-footer {
+    display: flex;
+    justify-content: center;
+    /* Centers horizontally on all screens */
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 30px auto 20px auto;
+    padding: 0 16px;
+    /* Prevents buttons from touching screen edges on tiny devices */
+}
+
+.btn-accept,
+.btn-reject {
+    /* Dimensions: Forcing them to be compact like the Reset button */
+    width: auto !important;
+    flex: 0 1 auto;
+    /* Prevents buttons from growing to fill space */
+    min-width: 110px;
+    /* Ensures buttons are large enough to be clickable */
+
+    /* Padding & Font: Matching the 'Reset' button aesthetic */
+    padding: 6px 14px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+
+    /* Layout */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    /* Keeps text on one line on small screens */
+}
+
+/* Tablet and Desktop optimization */
+@media (min-width: 768px) {
+    .oa-footer {
+        gap: 24px;
+        /* More breathing room on larger screens */
+    }
+
+    .btn-accept,
+    .btn-reject {
+        min-width: 140px;
+        /* Slightly larger buttons for mouse users */
+        padding: 8px 20px !important;
+    }
+}
+
+.btn-accept {
+    background: #1e293b !important;
+    color: white !important;
+    border: 1px solid #334155 !important;
+}
+
+.btn-reject {
+    background: #fecaca !important;
+    color: #991b1b !important;
+    padding: 2px 2px;
+}
+
+/* Responsive adjustments for Tablets/Desktop */
+
+.text-red {
+    color: #f87171;
+}
+
+.text-green {
+    color: #4ade80;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    /* Adds space outside the header */
+}

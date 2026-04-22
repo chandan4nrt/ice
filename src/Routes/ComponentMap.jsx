@@ -1,4 +1,4 @@
-import { lazy } from 'react'  
+import { lazy } from 'react'
 
 /** Vendor Route */
 const RetailerOrder = lazy(() => import('../pages/vendor/RetailerOrder'))
@@ -12,6 +12,8 @@ const Company = lazy(() => import('../pages/vendor/Company'))
 const WhyIceberg = lazy(() => import('../pages/vendor/WhyIceberg'))
 const Products = lazy(() => import('../pages/vendor/Products'))
 const Where = lazy(() => import('../pages/vendor/Where'))
+const OrderConfirmation = lazy(() => import('../pages/vendor/OrderConfirmation'))
+const InvoicePage = lazy(() => import('../pages/vendor/InvoicePage'))
 /** Distributor Imports */
 const DistributorUsers = lazy(() => import('../pages/distributor/DistributorUsers'))
 const UpdateVendorHero = lazy(() => import('../components/addVendor/UpdateVendorHero'))
@@ -47,6 +49,8 @@ export const componentMap = {
   WhyIceberg,
   Products,
   Where,
+  OrderConfirmation,
+  InvoicePage,
 
   /** Distributor Component */
   DistributorUsers,
@@ -54,9 +58,11 @@ export const componentMap = {
   VendorDetails,
 
   /** Admin Component */
-  AdminDashboard,
+  //api-menuName":"Dashboard" - react component - AdminDashboard
+
+  Dashboard: AdminDashboard,
   AddVendor: ResigterVendorHero,
-  BusinessDetails,
+  BusinessDetails: BusinessDetails,
   KYCVerification,
   BankDetails,
   LocationVerification,

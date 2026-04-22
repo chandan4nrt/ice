@@ -11,8 +11,8 @@ import { getRoleBasedRedirect, flattenMenu } from "../utills/helper";
 import NotFound from "../pages/NoteFound";
 
 const renderDynamicRoutes = (routes) => {
-  if(!routes) return []
-  
+  if (!routes) return []
+
   return routes.map((route) => {
     const Component = componentMap[route.component];
 
@@ -33,8 +33,8 @@ const AppRoutes = ({ logoUrl }) => {
   const { data: dynamicRoutes } = useGetRoutes(user?.primaryRole);
   const { data: menuItems } = useGetSidebar();
 
-  const finalRoutes = (dynamicRoutes && dynamicRoutes.length > 0) 
-    ? dynamicRoutes 
+  const finalRoutes = (dynamicRoutes && dynamicRoutes.length > 0)
+    ? dynamicRoutes
     : (menuItems ? flattenMenu(menuItems) : []);
 
   if (loading) {
@@ -49,15 +49,19 @@ const AppRoutes = ({ logoUrl }) => {
     <Routes>
       <Route path="/login" element={<PublicRoute> <Login /> </PublicRoute>} />
       <Route path="/unauthorized" element={<Unauthorized />} />
- 
+
       {/* Protected Layout */}
       <Route element={<Layout logoUrl={logoUrl} />}>
         <Route element={<ProtectedRoute allowedRoles={user?.roleCodes} />}>
+          {/* Static Process Routes */}
+          <Route path="/sales/order-confirmation" element={<componentMap.OrderConfirmation />} />
+          <Route path="/sales/invoice/:id" element={<componentMap.InvoicePage />} />
+
           {/* Dynamic Routes */}
           {renderDynamicRoutes(finalRoutes)}
         </Route>
       </Route>
-      
+
       <Route index element={<Navigate to={getRoleBasedRedirect(user?.primaryRole)} replace />} />
       {dynamicRoutes && <Route path="*" element={<ProtectedRoute allowedRoles={user?.roleCodes}><NotFound /></ProtectedRoute>} />}
     </Routes>

@@ -7,14 +7,14 @@ export const getRoleBasedRedirect = (role) => {
     USER: "/user/dashboard",
     SALESMAN: "/sales/dashboard",
   };
-  return redirects[role] ;
+  return redirects[role];
 };
 
 const slugify = (text) =>
   text?.toLowerCase().replace(/\s+/g, "-");
 
 export const transformMenu = (menus) => {
-  if(!menus) return []
+  if (!menus) return []
 
   return menus?.map((item) => {
     const name = item.pageName || item.menuName;
