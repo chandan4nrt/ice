@@ -32,8 +32,8 @@ export const STATIC_ROUTES = {
     { id: 303, path: "/distributor/stockist-management", component: "StockistManagement", label: "Stockist Management" },
     { id: 304, path: "/distributor/sales-person-management", component: "SalesPersonManagement", label: "Sales Person Management" },
     { id: 305, path: "/distributor/product-management", component: "ProductManagement", label: "Product Management" },
-    { id: 306, path: "/sales/order-confirmation", component: "DistributorOrderConfirmation", label: "Order Confirmation" },
-    { id: 307, path: "/sales/invoice/INV-001", component: "DistributorInvoicePage", label: "Invoice" },
+    { id: 306, path: "/distributor/order-confirmation", component: "DistributorOrderConfirmation", label: "Order Confirmation" },
+    { id: 307, path: "/distributor/invoice/INV-001", component: "DistributorInvoicePage", label: "Invoice" },
   ],
   SALESMAN: [
     { id: 401, path: "/sales/dashboard", component: "SalesDashboard", label: "Dashboard" },
