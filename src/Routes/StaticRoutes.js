@@ -38,7 +38,5 @@ export const STATIC_ROUTES = {
   SALESMAN: [
     { id: 401, path: "/sales/dashboard", component: "SalesDashboard", label: "Dashboard" },
     { id: 402, path: "/sales/orders", component: "Orders", label: "Orders" },
-    { id: 403, path: "/sales/order-confirmation", component: "OrderConfirmation", label: "Order Confirmation" },
-    { id: 404, path: "/sales/invoice/INV-001", component: "InvoicePage", label: "Invoice" },
   ]
 };
