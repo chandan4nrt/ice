@@ -5,8 +5,11 @@ import { useParams } from "react-router-dom";
 import { useGetInvoiceDetails } from "../../services/order.service";
 
 export default function InvoicePage() {
-  const { id } = useParams();
+  const { id: routeId } = useParams();
+  const id = routeId || "INV-001";
   const { data, isLoading, isError } = useGetInvoiceDetails(id);
+
+  console.log("InvoicePage ID:", id, "Data:", data, "isError:", isError);
 
   if (isLoading) return <div className="text-center p-10 mt-10">Loading Invoice...</div>;
   if (isError || !data) return <div className="text-center p-10 mt-10 text-red-500">Error loading invoice details.</div>;

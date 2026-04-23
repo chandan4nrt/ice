@@ -56,8 +56,8 @@ const AppRoutes = ({ logoUrl }) => {
       <Route element={<Layout logoUrl={logoUrl} />}>
         <Route element={<ProtectedRoute allowedRoles={user?.roleCodes} />}>
           {/* Static Process Routes */}
-          <Route path="/sales/order-confirmation" element={<componentMap.OrderConfirmation />} />
-          <Route path="/sales/invoice/:id" element={<componentMap.InvoicePage />} />
+          <Route path="/sales/invoice/:id" element={role === 'DISTRIBUTOR' ? <componentMap.DistributorInvoicePage /> : <componentMap.InvoicePage />} />
+          <Route path="/sales/order-confirmation" element={role === 'DISTRIBUTOR' ? <componentMap.DistributorOrderConfirmation /> : <componentMap.OrderConfirmation />} />
 
           {/* Dynamic Routes */}
           {renderDynamicRoutes(finalRoutes)}

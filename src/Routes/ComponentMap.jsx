@@ -12,8 +12,6 @@ const Company = lazy(() => import('../pages/vendor/Company'))
 const WhyIceberg = lazy(() => import('../pages/vendor/WhyIceberg'))
 const Products = lazy(() => import('../pages/vendor/Products'))
 const Where = lazy(() => import('../pages/vendor/Where'))
-const OrderConfirmation = lazy(() => import('../pages/vendor/OrderConfirmation'))
-const InvoicePage = lazy(() => import('../pages/vendor/InvoicePage'))
 const DistributorUsers = lazy(() => import('../pages/distributor/DistributorUsers'))
 const UpdateVendorHero = lazy(() => import('../components/addVendor/UpdateVendorHero'))
 const DistributorDashboard = lazy(() => import('../pages/distributor/DistributorDashboard'))
@@ -21,6 +19,8 @@ const VendorDetails = lazy(() => import('../pages/distributor/VendorDetails'))
 const StockistManagement = lazy(() => import('../pages/distributor/StockistManagement'))
 const SalesPersonManagement = lazy(() => import('../pages/distributor/SalesPersonManagement'))
 const ProductManagement = lazy(() => import('../pages/distributor/ProductManagement'))
+const DistributorOrderConfirmation = lazy(() => import('../pages/distributor/OrderConfirmation'))
+const DistributorInvoicePage = lazy(() => import('../pages/distributor/InvoicePage'))
 
 
 /** Admin Imports */
@@ -72,10 +72,6 @@ export const componentMap = {
   "Products": Products,
   Where,
   "Where": Where,
-  OrderConfirmation,
-  "OrderConfirmation": OrderConfirmation,
-  InvoicePage,
-  "InvoicePage": InvoicePage,
 
   /** Distributor Components */
   DistributorDashboard,
@@ -92,6 +88,8 @@ export const componentMap = {
   "SalesPersonManagement": SalesPersonManagement,
   ProductManagement,
   "ProductManagement": ProductManagement,
+  "DistributorOrderConfirmation": DistributorOrderConfirmation,
+  "DistributorInvoicePage": DistributorInvoicePage,
 
   /** Admin Components */
   Dashboard: AdminDashboard,

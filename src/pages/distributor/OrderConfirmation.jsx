@@ -8,6 +8,8 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { acceptOrderSchema } from "../../validations/order.schema";
 import { useAcceptOrder, useRejectOrder } from "../../services/order.service";
+import { useAuth } from "../../context/AuthContext";
+import { getRoleBasedRedirect } from "../../utills/helper";
 
 const INITIAL_ITEMS = [
   { id: 23, name: "Crushed ICE 1.25 KG", stocks: -190, qty: 200, price: 1.5 },
@@ -16,6 +18,7 @@ const INITIAL_ITEMS = [
 
 export default function OrderConfirmation() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const acceptMutation = useAcceptOrder();
   const rejectMutation = useRejectOrder();
 
@@ -63,7 +66,7 @@ export default function OrderConfirmation() {
   const onReject = async () => {
     try {
       await rejectMutation.mutateAsync({ orderId: "ORD-001" });
-      navigate(-1);
+      navigate(getRoleBasedRedirect(user?.primaryRole));
     } catch (error) {
       // Error handled by hook
     }

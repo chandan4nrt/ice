@@ -36,8 +36,12 @@ const MOCK_INVOICE_DATA = {
 
 // --- Mock API Fetchers ---
 const fetchInvoiceDetails = async (invoiceId) => {
+  console.log("Service: fetchInvoiceDetails for ID:", invoiceId);
   return new Promise((resolve) => {
-    setTimeout(() => resolve(MOCK_INVOICE_DATA), 500);
+    setTimeout(() => {
+      console.log("Service: resolving MOCK_INVOICE_DATA");
+      resolve(MOCK_INVOICE_DATA);
+    }, 500);
   });
 };
 

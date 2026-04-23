@@ -24,3 +24,20 @@ export const orderSchema = yup.object({
 
   createdBy: yup.number().required(),
 });
+
+export const acceptOrderSchema = yup.object({
+  items: yup
+    .array()
+    .of(
+      yup.object({
+        id: yup.number().required(),
+        name: yup.string().required(),
+        stocks: yup.number().required(),
+        qty: yup.number().min(1, "Must be at least 1").required("Required"),
+        price: yup.number().required(),
+      })
+    )
+    .min(1, "At least one item required"),
+  requestedDate: yup.string().required(),
+  billedDate: yup.string().required(),
+});
