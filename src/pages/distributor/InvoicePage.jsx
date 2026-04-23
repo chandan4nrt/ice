@@ -76,12 +76,12 @@ export default function InvoicePage() {
 
         {/* 3. Items List Section */}
         <div className="table-section">
-          <div className="side-logos">
+          {/* <div className="side-logos">
             <img src="/logo.png" alt="QR" />
             <img src="/logo.png" alt="IAF" />
             <img src="/logo.png" alt="EGAC" />
             <img src="/logo.png" alt="QACB" />
-          </div>
+          </div> */}
 
           <div className="main-table-container">
             {/* Items Grid */}
@@ -194,7 +194,8 @@ export default function InvoicePage() {
             <h6>AUTHORISATION</h6>
             <div className="sign-area">
               <p>For <strong>{data.billFrom.name}</strong></p>
-              <div className="signature-line"></div>
+              <div className="signature-line">
+              </div>
               <p className="sign-label">Authorised Signatory</p>
             </div>
           </div>

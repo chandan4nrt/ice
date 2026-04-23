@@ -184,15 +184,18 @@
 .side-logos {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding-top: 50px;
+    justify-content: space-around;
+    padding: 20px 0;
+    max-width: 60px;
 }
 
 .side-logos img {
-    max-height: 40px;
-    width: auto;
-    opacity: 0.7;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 25px;
+    filter: grayscale(0.2);
 }
+
 
 .main-table-container {
     flex-grow: 1;
@@ -208,26 +211,49 @@
 
 .items-header-row {
     display: grid;
-    grid-template-columns: 40px 1.5fr 1fr 80px 80px 1fr 1.2fr;
+    grid-template-columns: 50px 1.5fr 1fr 80px 80px 1fr 1.2fr;
     background: #1e293b;
     color: #ffffff;
-    padding: 12px;
     font-size: 0.8rem;
     font-weight: 600;
 }
 
+.items-header-row div {
+    padding: 12px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.items-header-row div:last-child {
+    border-right: none;
+}
+
+.items-header-row .col-idx,
+.items-header-row .col-hsn,
+.items-header-row .col-gst,
+.items-header-row .col-qty {
+    text-align: center;
+}
+
+
 .items-data-row {
     display: grid;
-    grid-template-columns: 40px 1.5fr 1fr 80px 80px 1fr 1.2fr;
-    padding: 12px;
+    grid-template-columns: 50px 1.5fr 1fr 80px 80px 1fr 1.2fr;
+    padding: 0;
     border-bottom: 1px solid #f1f5f9;
     font-size: 0.85rem;
     color: #475569;
     align-items: center;
 }
 
-.items-data-row:nth-child(even) {
-    background: #f8fafc;
+.items-data-row div {
+    padding: 12px;
+}
+
+.items-data-row .col-idx,
+.items-data-row .col-hsn,
+.items-data-row .col-gst,
+.items-data-row .col-qty {
+    text-align: center;
 }
 
 .items-data-row .col-rate,
@@ -239,6 +265,7 @@
 .items-header-row .col-amt {
     text-align: right;
 }
+
 
 /* =========================================
    GST Breakup Grid
@@ -295,15 +322,21 @@
 }
 
 /* GST Column Alignments */
-.gst-header-row div:nth-child(2), .gst-data-row div:nth-child(2),
-.gst-header-row div:nth-child(4), .gst-data-row div:nth-child(4),
-.gst-header-row div:nth-child(6), .gst-data-row div:nth-child(6),
-.gst-header-row div:nth-child(7), .gst-data-row div:nth-child(7) {
+.gst-header-row div:nth-child(2),
+.gst-data-row div:nth-child(2),
+.gst-header-row div:nth-child(4),
+.gst-data-row div:nth-child(4),
+.gst-header-row div:nth-child(6),
+.gst-data-row div:nth-child(6),
+.gst-header-row div:nth-child(7),
+.gst-data-row div:nth-child(7) {
     text-align: right;
 }
 
-.gst-header-row div:nth-child(3), .gst-data-row div:nth-child(3),
-.gst-header-row div:nth-child(5), .gst-data-row div:nth-child(5) {
+.gst-header-row div:nth-child(3),
+.gst-data-row div:nth-child(3),
+.gst-header-row div:nth-child(5),
+.gst-data-row div:nth-child(5) {
     text-align: center;
 }
 
@@ -317,7 +350,8 @@
     border-top: 1px solid #e2e8f0;
 }
 
-.gst-total-label, .gst-total-value {
+.gst-total-label,
+.gst-total-value {
     font-weight: 700;
     color: #334155;
     font-size: 0.95rem;
@@ -325,43 +359,56 @@
 
 /* Calculation Row Styling */
 .calculation-section {
-    max-width: 300px;
+    max-width: 400px;
     margin-left: auto;
 }
 
 .calc-row {
     display: flex;
     justify-content: space-between;
-    padding: 6px 0;
-    font-size: 0.85rem;
-    color: #64748b;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.calc-row:nth-child(even) {
+    background: #f8fafc;
 }
 
 .total-amount-row {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
-    border-top: 2px solid #0f172a;
-    margin-top: 10px;
+    padding: 15px;
+    background: #f1f5f9;
+    border-top: 3px solid #1e293b;
+    align-items: center;
+    margin-top: 5px;
 }
 
 .total-label {
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.1rem;
-    color: #0f172a;
+    color: #1e293b;
 }
 
 .total-value {
     font-weight: 800;
-    font-size: 1.25rem;
-    color: #0f172a;
+    font-size: 1.4rem;
+    color: #1e293b;
 }
+
 
 .amount-in-words {
     text-align: right;
-    font-size: 0.65rem;
+    margin-top: 12px;
+    font-size: 0.85rem;
     color: #64748b;
-    margin-top: 10px;
+    padding-right: 15px;
+}
+
+.amount-in-words strong {
+    color: #334155;
+    font-weight: 700;
 }
 
 /* =========================================
@@ -567,17 +614,18 @@
 }
 
 .sign-area {
-    margin-top: 10px;
+    margin-top: 120px;
 }
 
 .sign-area p {
     font-size: 0.85rem;
     color: #475569;
+    padding-bottom: 34px;
 }
 
 .signature-line {
     border-top: 1px solid #334155;
-    margin: 120px 0 10px 0;
+    margin: 5px 0 10px 0;
 }
 
 .sign-label {
