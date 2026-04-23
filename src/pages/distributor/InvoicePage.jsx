@@ -40,7 +40,7 @@ export default function InvoicePage() {
             <div className="header-item"><span>BILL TO</span></div>
             <div className="header-item"><span>INVOICE INFO</span></div>
           </div>
-          
+
           <div className="billing-grid">
             <div className="bill-from">
               <strong>{data.billFrom.name}</strong>
@@ -95,7 +95,7 @@ export default function InvoicePage() {
                 <div className="col-rate">Rate (₹)</div>
                 <div className="col-amt">Amount (₹)</div>
               </div>
-              
+
               <div className="items-body">
                 {data.items.map((item, index) => (
                   <div className="items-data-row" key={item.id}>
@@ -137,8 +137,8 @@ export default function InvoicePage() {
 
         {/* 4. GST Summary Section */}
         <div className="gst-summary-section">
-          <h6>GST BREAKUP SUMMARY</h6>
           <div className="gst-grid">
+            <p className="gst-summary-title">GST BREAKUP SUMMARY</p>
             <div className="gst-header-row">
               <div>HSN/SAC</div>
               <div>Taxable Value</div>
@@ -185,7 +185,7 @@ export default function InvoicePage() {
 
           <div className="scan-pay">
             <h6>SCAN & PAY</h6>
-            <img src="/logo.png" alt="QR" className="qr-code" />
+            <img src="/qr-code.png" alt="QR" className="qr-code" />
             <p>Scan to pay instantly</p>
             <p>UPI / Bank Transfer</p>
           </div>
@@ -208,4 +208,4 @@ export default function InvoicePage() {
     </div>
   );
 }
-
+

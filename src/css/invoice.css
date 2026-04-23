@@ -243,49 +243,84 @@
 /* =========================================
    GST Breakup Grid
    ========================================= */
+
+.gst-summary-section {
+    padding: 20px 40px;
+}
+
+.gst-summary-title {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
 .gst-grid {
-    border: 1px solid #f1f5f9;
+    border: 1px solid #e2e8f0;
     border-radius: 4px;
     overflow: hidden;
 }
 
 .gst-header-row {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 0.8fr 1fr 0.8fr 1fr 1.2fr;
+    grid-template-columns: 1.2fr 1.5fr 1fr 1fr 1fr 1.2fr 1.2fr;
     background: #334155;
-    color: white;
-    padding: 10px;
-    font-size: 0.7rem;
+    color: #ffffff;
+    font-size: 0.75rem;
     font-weight: 600;
 }
 
+.gst-header-row div {
+    padding: 12px 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gst-header-row div:last-child {
+    border-right: none;
+}
+
+
 .gst-data-row {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 0.8fr 1fr 0.8fr 1fr 1.2fr;
-    padding: 10px;
-    border-bottom: 1px solid #f1f5f9;
-    font-size: 0.8rem;
+    grid-template-columns: 1.2fr 1.5fr 1fr 1fr 1fr 1.2fr 1.2fr;
+    font-size: 0.85rem;
     color: #475569;
+    border-bottom: 1px solid #f1f5f9;
 }
+
+.gst-data-row div {
+    padding: 12px 15px;
+}
+
+/* GST Column Alignments */
+.gst-header-row div:nth-child(2), .gst-data-row div:nth-child(2),
+.gst-header-row div:nth-child(4), .gst-data-row div:nth-child(4),
+.gst-header-row div:nth-child(6), .gst-data-row div:nth-child(6),
+.gst-header-row div:nth-child(7), .gst-data-row div:nth-child(7) {
+    text-align: right;
+}
+
+.gst-header-row div:nth-child(3), .gst-data-row div:nth-child(3),
+.gst-header-row div:nth-child(5), .gst-data-row div:nth-child(5) {
+    text-align: center;
+}
+
 
 .gst-footer-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 10px;
     background: #f8fafc;
-    border-top: 2px solid #e2e8f0;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 60px;
+    border-top: 1px solid #e2e8f0;
 }
 
-.gst-total-label {
-    text-align: right;
-    font-weight: 800;
-    color: #1e293b;
-    padding-right: 20px;
-}
-
-.gst-total-value {
-    font-weight: 800;
-    color: #1e293b;
+.gst-total-label, .gst-total-value {
+    font-weight: 700;
+    color: #334155;
+    font-size: 0.95rem;
 }
 
 /* Calculation Row Styling */
