@@ -21,6 +21,8 @@ const SalesPersonManagement = lazy(() => import('../pages/distributor/SalesPerso
 const ProductManagement = lazy(() => import('../pages/distributor/ProductManagement'))
 const DistributorOrderConfirmation = lazy(() => import('../pages/distributor/OrderConfirmation'))
 const DistributorInvoicePage = lazy(() => import('../pages/distributor/InvoicePage'))
+// const DistributorRetailerOrders = lazy(() => import('../pages/distributor/RetailerOrders'))
+
 
 
 /** Admin Imports */
@@ -90,6 +92,8 @@ export const componentMap = {
   "ProductManagement": ProductManagement,
   "DistributorOrderConfirmation": DistributorOrderConfirmation,
   "DistributorInvoicePage": DistributorInvoicePage,
+  // "RetailerOrders": DistributorRetailerOrders,
+  "RetailerOrders": RetailerOrder,
 
   /** Admin Components */
   Dashboard: AdminDashboard,

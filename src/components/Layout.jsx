@@ -9,7 +9,7 @@ import Topbar from "./Topbar";
 import BackHeader from "./BackHeader";
 import BottomNav from "./BottomNav";
 import PullToRefresh from "../components/PullToRefresh";
- 
+
 import { usePopup } from "../context/PopupContext";
 import Popup from "./Popup";
 import { Plus } from "lucide-react";
@@ -76,24 +76,24 @@ function Layout({ logoUrl, onMenuClick, setLogoUrl }) {
 
 
                 <div className={`mainbody ${isMobile ? "mobile" : "desktop"}`}>
-  {/* <AnimatePresence mode="wait"></AnimatePresence> */}
- 
-      <PullToRefresh disabled={!isMobile}>
-        <Outlet />
-      </PullToRefresh>
-    
+                    {/* <AnimatePresence mode="wait"></AnimatePresence> */}
 
-</div>
+                    <PullToRefresh disabled={!isMobile}>
+                        <Outlet />
+                    </PullToRefresh>
+
+
+                </div>
 
             </div>
             <div id="popup-root"></div>
-           {pathname.startsWith("/vendor/retailer-order") && (
+            {/* {pathname.startsWith("/vendor/retailer-order") && (
             <button className="retailerFab" onClick={() => navigate("/vendor/create-retailer-order")} >
                 <Plus size={22} />
             </button>
-            )}
+            )} */}
 
-            {!hideLayout && <BottomNav user={user} logoUrl={logoUrl} onClose={()=> setSidebarOpen(false)} />}
+            {!hideLayout && <BottomNav user={user} logoUrl={logoUrl} onClose={() => setSidebarOpen(false)} />}
         </div>
     );
 }

@@ -70,6 +70,10 @@ export default function BackHeader({ onMenuClick }) {
       title: "Review & Submit",
       subtitle: "Review all information before submitting for approval",
     },
+    "/distributor/retailer-orders": {
+      title: "Retailer Order",
+      subtitle: "Manage and track orders to retail partners",
+    },
   };
 
   let title = pageMeta[pathname]?.title;
