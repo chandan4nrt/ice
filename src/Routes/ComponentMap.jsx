@@ -12,12 +12,15 @@ const Company = lazy(() => import('../pages/vendor/Company'))
 const WhyIceberg = lazy(() => import('../pages/vendor/WhyIceberg'))
 const Products = lazy(() => import('../pages/vendor/Products'))
 const Where = lazy(() => import('../pages/vendor/Where'))
-const OrderConfirmation = lazy(() => import('../pages/vendor/OrderConfirmation'))
-const InvoicePage = lazy(() => import('../pages/vendor/InvoicePage'))
-/** Distributor Imports */
 const DistributorUsers = lazy(() => import('../pages/distributor/DistributorUsers'))
 const UpdateVendorHero = lazy(() => import('../components/addVendor/UpdateVendorHero'))
+const DistributorDashboard = lazy(() => import('../pages/distributor/DistributorDashboard'))
 const VendorDetails = lazy(() => import('../pages/distributor/VendorDetails'))
+const StockistManagement = lazy(() => import('../pages/distributor/StockistManagement'))
+const SalesPersonManagement = lazy(() => import('../pages/distributor/SalesPersonManagement'))
+const ProductManagement = lazy(() => import('../pages/distributor/ProductManagement'))
+const DistributorOrderConfirmation = lazy(() => import('../pages/distributor/OrderConfirmation'))
+const DistributorInvoicePage = lazy(() => import('../pages/distributor/InvoicePage'))
 
 
 /** Admin Imports */
@@ -36,40 +39,81 @@ const ProductsDetails = lazy(() => import('../pages/admin/ProductsDetails'))
 const SalesDashboard = lazy(() => import('../pages/sales/SalesDashboard'))
 
 
+const WithVendorFormProvider = (Component) => {
+  return (props) => (
+    <ResigterVendorHero standaloneMode={true}>
+      <Component {...props} />
+    </ResigterVendorHero>
+  );
+};
+
 export const componentMap = {
-  /** Vendor Component */
+  /** Vendor Components */
   VendorDashboard,
+  "VendorDashboard": VendorDashboard,
   StockLedger,
+  "StockLedger": StockLedger,
   IncomingStocks,
+  "IncomingStocks": IncomingStocks,
   CreateReplenishmentOrder,
+  "CreateReplenishmentOrder": CreateReplenishmentOrder,
   CreateRetailerOrder,
+  "CreateRetailerOrder": CreateRetailerOrder,
   RetailerOrder,
+  "RetailerOrder": RetailerOrder,
+  "Orders": RetailerOrder,
   Home,
+  "Home": Home,
   Company,
+  "Company": Company,
   WhyIceberg,
+  "WhyIceberg": WhyIceberg,
   Products,
+  "Products": Products,
   Where,
-  OrderConfirmation,
-  InvoicePage,
+  "Where": Where,
 
-  /** Distributor Component */
+  /** Distributor Components */
+  DistributorDashboard,
+  "DistributorDashboard": DistributorDashboard,
+  "Dashboard": DistributorDashboard,
   DistributorUsers,
-  EditVendor: UpdateVendorHero,
+  "DistributorUsers": DistributorUsers,
+  "EditVendor": UpdateVendorHero,
   VendorDetails,
+  "VendorDetails": VendorDetails,
+  StockistManagement,
+  "StockistManagement": StockistManagement,
+  SalesPersonManagement,
+  "SalesPersonManagement": SalesPersonManagement,
+  ProductManagement,
+  "ProductManagement": ProductManagement,
+  "DistributorOrderConfirmation": DistributorOrderConfirmation,
+  "DistributorInvoicePage": DistributorInvoicePage,
 
-  /** Admin Component */
-  //api-menuName":"Dashboard" - react component - AdminDashboard
-
+  /** Admin Components */
   Dashboard: AdminDashboard,
+  "AdminDashboard": AdminDashboard,
   AddVendor: ResigterVendorHero,
-  BusinessDetails: BusinessDetails,
-  KYCVerification,
-  BankDetails,
-  LocationVerification,
-  ReviewSubmit,
+  "AddVendor": ResigterVendorHero,
+  BusinessDetails: WithVendorFormProvider(BusinessDetails),
+  "BusinessDetails": WithVendorFormProvider(BusinessDetails),
+  KYCVerification: WithVendorFormProvider(KYCVerification),
+  "KYCVerification": WithVendorFormProvider(KYCVerification),
+  BankDetails: WithVendorFormProvider(BankDetails),
+  "BankDetails": WithVendorFormProvider(BankDetails),
+  LocationVerification: WithVendorFormProvider(LocationVerification),
+  "LocationVerification": WithVendorFormProvider(LocationVerification),
+  ReviewSubmit: WithVendorFormProvider(ReviewSubmit),
+  "ReviewSubmit": WithVendorFormProvider(ReviewSubmit),
   Users,
+  "Users": Users,
   Settings,
+  "Settings": Settings,
   ProductDetails: ProductsDetails,
-  /** Sales Component */
+  "ProductDetails": ProductsDetails,
+
+  /** Sales Components */
   SalesDashboard,
+  "SalesDashboard": SalesDashboard,
 };
