@@ -5,6 +5,7 @@ export const getRoleBasedRedirect = (role) => {
     VENDOR: "/vendor/dashboard",
     DISTRIBUTOR: "/distributor/dashboard",
     USER: "/user/dashboard",
+    RETAILER: "/retailer/dashboard",
     SALESMAN: "/sales/dashboard",
   };
   return redirects[role];

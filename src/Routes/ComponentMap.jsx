@@ -37,6 +37,15 @@ const ReviewSubmit = lazy(() => import('../pages/admin/ReviewSubmit'))
 const Users = lazy(() => import('../pages/admin/Users'))
 const Settings = lazy(() => import('../pages/admin/Settings'))
 const ProductsDetails = lazy(() => import('../pages/admin/ProductsDetails'))
+
+/** Retailer Imports */
+const CreateOrder = lazy(() => import("../pages/retailer/createOrder"));
+const RetailerDashboard = lazy(
+  () => import("../pages/retailer/retailerDashboard"),
+);
+const OrderList = lazy(() => import("../pages/retailer/orderList"));
+const PaymentDetail = lazy(() => import("../pages/retailer/paymentDetails"));
+
 /** Sales Imports */
 const SalesDashboard = lazy(() => import('../pages/sales/SalesDashboard'))
 
@@ -57,7 +66,7 @@ export const componentMap = {
   CreateReplenishmentOrder,
   CreateRetailerOrder,
   RetailerOrder,
-  "Orders": RetailerOrder,
+  // Orders: RetailerOrder,
   Home,
   Company,
   WhyIceberg,
@@ -66,20 +75,20 @@ export const componentMap = {
 
   /** Distributor Components */
   DistributorDashboard,
-  "Dashboard": DistributorDashboard,
+  Dashboard: DistributorDashboard,
   DistributorUsers,
-  "EditVendor": UpdateVendorHero,
+  EditVendor: UpdateVendorHero,
   VendorDetails,
   StockistManagement,
   SalesPersonManagement,
   ProductManagement,
-  "DistributorOrderConfirmation": DistributorOrderConfirmation,
-  "DistributorInvoicePage": DistributorInvoicePage,
-  // "RetailerOrders": DistributorRetailerOrders,
-  "RetailerOrders": RetailerOrder,
+  DistributorOrderConfirmation: DistributorOrderConfirmation,
+  DistributorInvoicePage: DistributorInvoicePage,
+  // RetailerOrders: DistributorRetailerOrders,
+  RetailerOrders: RetailerOrder,
 
   /** Admin Components */
-  "AdminDashboard": AdminDashboard,
+  AdminDashboard,
   AddVendor: ResigterVendorHero,
   BusinessDetails: WithVendorFormProvider(BusinessDetails),
   KYCVerification: WithVendorFormProvider(KYCVerification),
@@ -89,6 +98,12 @@ export const componentMap = {
   Users,
   Settings,
   ProductDetails: ProductsDetails,
+
+  /** Retailer Component */
+  CreateOrder,
+  RetailerDashboard,
+  OrderList,
+  PaymentDetail,
 
   /** Sales Components */
   SalesDashboard,

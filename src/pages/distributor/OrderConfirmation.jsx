@@ -57,7 +57,7 @@ export default function OrderConfirmation() {
   const onAccept = async (data) => {
     try {
       await acceptMutation.mutateAsync(data);
-      navigate("/sales/invoice/INV-001");
+      navigate("/distributor/invoice/INV-001");
     } catch (error) {
       // Error handled by hook
     }
@@ -152,15 +152,15 @@ export default function OrderConfirmation() {
 
         {/* Footer Actions */}
         <div className="oa-footer">
-          <Button 
-            className="btn-accept" 
+          <Button
+            className="btn-accept"
             onClick={handleSubmit(onAccept)}
             isLoading={acceptMutation.isPending}
           >
             Order Accept
           </Button>
-          <Button 
-            className="btn-reject" 
+          <Button
+            className="btn-reject"
             onClick={onReject}
             isLoading={rejectMutation.isPending}
           >

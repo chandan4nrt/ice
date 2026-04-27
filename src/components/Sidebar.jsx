@@ -3,13 +3,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import "../css/Sidebar.css";
 import { useAuth } from "../context/AuthContext";
 import { ChevronRight } from "lucide-react";
-import { STATIC_ROUTES } from "../Routes/StaticRoutes";
+import { SIDEBAR_MENU } from "../Routes/StaticRoutes";
 
 export default function Sidebar({ open, onClose }) {
   const { user, logout } = useAuth();
 
   const roleString = user?.primaryRole?.toUpperCase();
-  const menuItems = (roleString && STATIC_ROUTES[roleString]) ? STATIC_ROUTES[roleString] : [];
+  const menuItems = (roleString && SIDEBAR_MENU[roleString]) ? SIDEBAR_MENU[roleString] : [];
 
   const [openMenus, setOpenMenus] = useState({});
   const location = useLocation();

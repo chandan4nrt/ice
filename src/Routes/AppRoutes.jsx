@@ -34,6 +34,7 @@ const renderDynamicRoutes = (routes) => {
 
 const AppRoutes = ({ logoUrl }) => {
   const { user, loading: authLoading } = useAuth();
+  // const { data: dynamicRoutes } = useGetRoutes(user?.primaryRole);
   const role = user?.primaryRole?.toUpperCase();
   
   // Exclusively using static routes
@@ -56,11 +57,13 @@ const AppRoutes = ({ logoUrl }) => {
       <Route element={<Layout logoUrl={logoUrl} />}>
         <Route element={<ProtectedRoute allowedRoles={user?.roleCodes} />}>
           {/* Static Process Routes */}
-          <Route path="/sales/invoice/:id" element={role === 'DISTRIBUTOR' ? <componentMap.DistributorInvoicePage /> : <componentMap.InvoicePage />} />
-          <Route path="/sales/order-confirmation" element={role === 'DISTRIBUTOR' ? <componentMap.DistributorOrderConfirmation /> : <componentMap.OrderConfirmation />} />
+          {/* <Route path="/sales/invoice/:id" element={role === 'DISTRIBUTOR' ? <componentMap.DistributorInvoicePage /> : <componentMap.InvoicePage />} />
+          <Route path="/sales/order-confirmation" element={role === 'DISTRIBUTOR' ? <componentMap.DistributorOrderConfirmation /> : <componentMap.OrderConfirmation />} /> */}
 
           {/* Dynamic Routes */}
+          {/* {renderDynamicRoutes(dynamicRoutes)} */}
           {renderDynamicRoutes(finalRoutes)}
+
         </Route>
       </Route>
 
