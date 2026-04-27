@@ -31,9 +31,9 @@ const Select = ({
         {...props}
       >
         <option value="">{placeholder}</option>
-        {options.map((item) => (
+        {options.map((item, index) => (
           <option
-            key={item[mapField.value]}
+            key={item[mapField.value] ? item[mapField.value] : index}
             value={item[mapField.value]}
           >
             {item[mapField.label]}

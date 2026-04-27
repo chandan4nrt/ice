@@ -11,7 +11,7 @@ import Textarea from "../../components/atoms/Textarea";
 
 // ✅ Import hooks — reuse the same service used in vendor's CreateRetailerOrder
 import {
-  useGetVendors,
+  useGetRetailers,
   useGetProducts,
   useCreateOrder,
 } from "../../services/createRetailOrder.service";
@@ -44,7 +44,7 @@ export default function CreateOrder() {
     hasNextPage: hasMoreCustomers,
     fetchNextPage: fetchMoreCustomers,
     isFetchingNextPage: isFetchingMoreCustomers,
-  } = useGetVendors();
+  } = useGetRetailers();
 
   const { mutate: createOrder, isPending } = useCreateOrder();
 

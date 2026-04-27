@@ -8,11 +8,12 @@ import { InfinitePagination } from "../../components/Pagination";
 
 // ✅ Import all 3 hooks
 import {
-  useGetVendors,
+  useGetRetailers,
   useGetProducts,
   useCreateOrder,
 } from "../../services/createRetailOrder.service";
 import Select from "../../components/atoms/Select";
+import Input from "../../components/atoms/Input";
 
 export default function CreateRetailerOrder() {
   const [retailer, setRetailer] = useState("");
@@ -29,7 +30,9 @@ export default function CreateRetailerOrder() {
 
   // Popup states
   const [product, setProduct] = useState("");
+  const [productError, setProductError] = useState("");
   const [qty, setQty] = useState(1);
+  const [qtyError, setQtyError] = useState("");
   // const [discount, setDiscount] = useState(0);
   const [note, setNote] = useState("");
   const [remarks, setRemarks] = useState("");
@@ -42,7 +45,7 @@ export default function CreateRetailerOrder() {
     hasNextPage: hasMoreVendors,
     fetchNextPage: fetchMoreVendors,
     isFetchingNextPage: isFetchingMoreVendors,
-  } = useGetVendors();
+  } = useGetRetailers();
 
   const { mutate: createOrder, isPending } = useCreateOrder(); // /api/v1/order
 
@@ -51,15 +54,25 @@ export default function CreateRetailerOrder() {
   // ✅ Use API fields: productName & amount
   const selectedProduct = products.find((p) => p.productName === product);
   // const totalPrice = selectedProduct ? selectedProduct.amount * qty - discount : 0;
-  const totalPrice = selectedProduct ? selectedProduct.amount * qty : 0;
+  const totalPrice = selectedProduct ? selectedProduct.mrp * qty : 0;
 
   // ✅ Add / Update Order
   const handleSave = () => {
-    if (!product) return;
+    let valid = true;
+    if (!product) {
+      setProductError("Please select a product");
+      valid = false;
+    }
+    if (qty < 1) {
+      setQtyError("Quantity must be at least 1");
+      valid = false;
+    }
+
+    if (!valid) return;
 
     const newItem = {
       product,
-      price: selectedProduct.amount, // ✅ from API
+      price: selectedProduct.mrp, // ✅ from API
       qty,
       // discount,
       note,
@@ -78,7 +91,9 @@ export default function CreateRetailerOrder() {
     }
 
     setProduct("");
+    setProductError("");
     setQty(1);
+    setQtyError("");
     // setDiscount(0);
     setShowPopup(false);
   };
@@ -92,7 +107,9 @@ export default function CreateRetailerOrder() {
   // ✅ Edit
   const handleEdit = (item, index) => {
     setProduct(item.product);
+    setProductError("");
     setQty(item.qty);
+    setQtyError("");
     // setDiscount(item.discount);
     setNote(item.note ?? "");
     setEditIndex(index);
@@ -105,6 +122,10 @@ export default function CreateRetailerOrder() {
 
   // ✅ Submit — build payload and hit /api/v1/order
   const handleSubmit = () => {
+    if (!retailer) {
+      alert("Please select a retailer");
+      return;
+    }
     if (orders.length === 0) {
       alert("Please add at least one product");
       return;
@@ -139,7 +160,9 @@ export default function CreateRetailerOrder() {
     setStatus("In orders");
     setDate(new Date());
     setProduct("");
+    setProductError("");
     setQty(1);
+    setQtyError("");
     setNote("");
     setRemarks("");
     // setDiscount(0);
@@ -155,6 +178,7 @@ export default function CreateRetailerOrder() {
             wrapperClass="field"
             className="selectdd"
             label={"Select Retailer"}
+            required={true}
             value={retailer}
             onChange={(e) => setRetailer(e.target.value)}
             placeholder="Select Retailer"
@@ -262,7 +286,7 @@ export default function CreateRetailerOrder() {
           </div>
           <div className="amount">
             <p>₹{grandTotal}</p>
-            <p className="sub">₹{totalDiscount}</p>
+            {/* <p className="sub">₹{totalDiscount}</p> */}
           </div>
         </div>
       </div>
@@ -303,22 +327,34 @@ export default function CreateRetailerOrder() {
             <Select
               label={"Product"}
               value={product}
-              onChange={(e) => setProduct(e.target.value)}
+              error={productError}
+              onChange={(e) => {
+                setProduct(e.target.value);
+                setProductError("");
+              }}
               placeholder="Select Product"
               options={products}
               mapField={{ label: "productName", value: "productName" }}
             />
 
             {/* Quantity */}
-            <div className="form-group">
-              <label>Quantity</label>
-              <input
-                type="number"
-                className="popup-input"
-                value={qty}
-                onChange={(e) => setQty(Number(e.target.value))}
-              />
-            </div>
+            <Input
+              label="Quantity"
+              type="number"
+              min="1"
+              className="popup-input"
+              value={qty}
+              error={qtyError}
+              onChange={(e) => {
+                const val = Number(e.target.value);
+                setQty(val);
+                if (val < 1) {
+                  setQtyError("Quantity cannot be less than 1");
+                } else {
+                  setQtyError("");
+                }
+              }}
+            />
 
             {/* Discount */}
             {/* <div className="form-group">
@@ -331,7 +367,7 @@ export default function CreateRetailerOrder() {
               />
             </div> */}
             {/* NOTE */}
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Note</label>
               <textarea
                 className="popup-input"
@@ -339,7 +375,7 @@ export default function CreateRetailerOrder() {
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
               />
-            </div>
+            </div> */}
 
             {/* Total */}
             <div className="total-row">
@@ -375,327 +411,3 @@ export default function CreateRetailerOrder() {
     </>
   );
 }
-
-// import React, { useState } from "react";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-// import "../../css/popup.css";
-// import Popup from "../../components/Popup";
-// import { Pencil, Trash2, X } from "lucide-react";
-// //step 1
-// import { useGetVendors } from "../../services/createRetailOrder.service";
-
-// export default function CreateRetailerOrder() {
-//   const [retailer, setRetailer] = useState("");
-//   const [status, setStatus] = useState("In orders");
-//   const [date, setDate] = useState(new Date());
-//   const [showPopup, setShowPopup] = useState(false);
-//   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-
-//   // Orders list
-//   const [orders, setOrders] = useState([]);
-
-//   // Edit index
-//   const [editIndex, setEditIndex] = useState(null);
-
-//   // Popup states
-//   const [product, setProduct] = useState("");
-//   const [qty, setQty] = useState(1);
-//   const [discount, setDiscount] = useState(0);
-// //step 2
-// const { data: vendors = [], isLoading } = useGetVendors();
-
-//   const statusList = ["In orders", "Completed", "Cancelled"];
-
-//   const products = [
-//     { name: "ice cube 1", price: 30 },
-//     { name: "Product 2", price: 200 },
-//     { name: "Product 3", price: 300 },
-//   ];
-
-//   const selectedProduct = products.find((p) => p.name === product);
-
-//   const totalPrice =
-//     selectedProduct ? selectedProduct.price * qty - discount : 0;
-
-//   // ✅ Add / Update Order
-//   const handleSave = () => {
-//     if (!product) return;
-
-//     const newItem = {
-//       product,
-//       price: selectedProduct.price,
-//       qty,
-//       discount,
-//       total: totalPrice,
-//     };
-
-//     if (editIndex !== null) {
-//       const updated = [...orders];
-//       updated[editIndex] = newItem;
-//       setOrders(updated);
-//       setEditIndex(null);
-//     } else {
-//       setOrders([...orders, newItem]);
-//     }
-
-//     setProduct("");
-//     setQty(1);
-//     setDiscount(0);
-//     setShowPopup(false);
-//   };
-
-//   // ✅ Delete
-//   const handleDelete = (index) => {
-//     const updated = orders.filter((_, i) => i !== index);
-//     setOrders(updated);
-//   };
-
-//   // ✅ Edit
-//   const handleEdit = (item, index) => {
-//     setProduct(item.product);
-//     setQty(item.qty);
-//     setDiscount(item.discount);
-//     setEditIndex(index);
-//     setShowPopup(true);
-//   };
-
-//   // ✅ Totals
-//   const grandTotal = orders.reduce((sum, item) => sum + item.total, 0);
-//   const totalDiscount = orders.reduce((sum, item) => sum + item.discount, 0);
-
-//   return (
-//     <>
-//       <div className="darkbox">
-
-//         {/* Retailer */}
-//         {/* step 3 */}
-//         <div className="field">
-//           <label>Select Retailer</label>
-//          <select
-//   className="selectdd"
-//   value={retailer}
-//   onChange={(e) => setRetailer(e.target.value)}
-// >
-//   <option value="">Choose Retailer</option>
-
-//   {!isLoading && vendors.length === 0 && (
-//     <option>No vendors found</option>
-//   )}
-
-//   {vendors.map((v) => (
-//     <option key={v.vendorId} value={v.vendorId}>
-//       {v.businessName}
-//     </option>
-//   ))}
-// </select>
-//         </div>
-
-//         {/* Date */}
-//         <div className="field">
-//           <label>Date</label>
-//           <DatePicker
-//             selected={date}
-//             onChange={(d) => setDate(d)}
-//             dateFormat="EEEE, MMMM d, yyyy"
-//             className="datepicker-input"
-//           />
-//         </div>
-
-//         {/* Status */}
-//         <div className="field">
-//           <label>Status</label>
-//           <select
-//             className="selectdd"
-//             value={status}
-//             onChange={(e) => setStatus(e.target.value)}
-//           >
-//             {statusList.map((s, i) => (
-//               <option key={i} value={s}>{s}</option>
-//             ))}
-//           </select>
-//         </div>
-
-//         {/* Product Orders */}
-//         <div className="product-header">
-//           <h3>Product orders</h3>
-//           <button
-//             className="add-btn"
-//             onClick={() => {
-//               setEditIndex(null);
-//               setShowPopup(true);
-//             }}
-//           >
-//             +Add
-//           </button>
-//         </div>
-
-//         {/* ✅ Order List */}
-//         {orders.length > 0 && (
-//           <div className="order-list">
-//             <div className="tablehead">
-//       <div className="product"><strong>Product</strong></div>
-//       <div className="qty"><strong>Qty</strong></div>
-//       <div className="total"><strong>Price</strong></div>
-//       <div className="actions"><strong>Actions</strong></div>
-//     </div>
-
-//             {orders.map((item, index) => (
-//               <div className="order-row field" key={index}>
-                
-//                 <div className="product">
-//                   <p>{item.product}</p>
-//                   <span>₹{item.price}</span>
-//                 </div>
-
-//                 <div className="qty">{item.qty}</div>
-//                 {/* ₹{item.total} */}
-//                 <div className="total"> ₹{item.price * item.qty}</div>
-
-//                 <div className="actions">
-//                   <button className="editbtn" onClick={() => handleEdit(item, index)}><Pencil size={16} /></button>
-//                   <button className="crossbtn" onClick={() => handleDelete(index)}><X size={16} /></button>
-//                 </div>
-
-//               </div>
-//             ))}
-//           </div>
-//         )}
-
-//         {/* Price Summary */}
-//         <div className="price">
-//           <div>
-//             <p className="title">Grand total price</p>
-//             <p className="sub">Total discount</p>
-//           </div>
-//           <div className="amount">
-//             <p>₹{grandTotal}</p>
-//             <p className="sub">₹{totalDiscount}</p>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Note */}
-//       <div className="note-section">
-//         <label>Note</label>
-//         <textarea placeholder="Enter text..." />
-//       </div>
-
-//       <button
-//         className="submit-btn"
-//         onClick={() => {
-//           if (orders.length === 0) {
-//             alert("Please add at least one product");
-//             return;
-//           }
-//           setShowSuccessPopup(true);
-//         }}
-//       >
-//         Submit
-//       </button>
-
-
-//       {/* ✅ Popup */}
-//       {showPopup && (
-//         <Popup
-//           title="Make product orders"
-//           onClose={() => setShowPopup(false)}
-//           closeOnOutsideClick={false}
-//           onSave={handleSave}
-//           saveText={editIndex !== null ? "Update" : "+Add"}
-//           resetText="Cancel"
-//           onReset={() => setShowPopup(false)}
-//           submitClass="darkBtn"
-//         >
-//           <div className="order-popup">
-
-//             {/* Product */}
-//             <div className="form-group">
-//               <label>Product</label>
-//               <select
-//                 className="popup-input"
-//                 value={product}
-//                 onChange={(e) => setProduct(e.target.value)}
-//               >
-//                 <option value="">Select Product</option>
-//                 {products.map((p, i) => (
-//                   <option key={i} value={p.name}>{p.name}</option>
-//                 ))}
-//               </select>
-//             </div>
-
-//             {/* Quantity */}
-//             <div className="form-group">
-//               <label>Quantity</label>
-//               <input
-//                 type="number"
-//                 className="popup-input"
-//                 value={qty}
-//                 onChange={(e) => setQty(Number(e.target.value))}
-//               />
-//             </div>
-
-//             {/* Discount */}
-//             <div className="form-group">
-//               <label>Discount</label>
-//               <input
-//                 type="number"
-//                 className="popup-input"
-//                 value={discount}
-//                 onChange={(e) => setDiscount(Number(e.target.value))}
-//               />
-//             </div>
-
-//             {/* Total */}
-//             <div className="total-row">
-//               <span>Total Price</span>
-//               <strong>₹{totalPrice}</strong>
-//             </div>
-
-//           </div>
-//         </Popup>
-//       )}
-
-//       {showSuccessPopup && (
-//         <Popup
-//           title=""
-//           onClose={() => setShowSuccessPopup(false)}
-//           closeOnOutsideClick={false}
-//           submitClass="darkBtn"
-//           hideFooter={true}  
-//         >
-//           <div className="successfullybox">
-//             <div className="icon-wrapper">
-//               <div className="circle">
-//                 <div className="checkmark">✔</div>
-//               </div>
-//             </div>
-
-//             <div className="success-text">
-//               Order generated successfully
-//             </div>
-
-//             <button
-//               className="continue-btn"
-//               onClick={() => {
-//                 setShowSuccessPopup(false);
-
-//                 setOrders([]);
-//                 setRetailer("");
-//                 setStatus("In orders");
-//                 setDate(new Date());
-
-//                 setProduct("");
-//                 setQty(1);
-//                 setDiscount(0);
-//                 setEditIndex(null);
-//               }}
-//             >
-//               CONTINUE
-//             </button>
-//           </div>
-//         </Popup>
-//       )}
-//     </>
-//   );
-// }

@@ -904,15 +904,76 @@ padding-top:16px;
 }
 
 
-.tablehead{border-bottom: 2px solid rgba(117, 86, 86, 0.1); padding-bottom: 3px; color: #7d8faa;}
-.order-row, .tablehead{display: flex; justify-content: space-between;}
+.tablehead, .order-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 0.8fr;
+  gap: 10px;
+  align-items: center;
+}
 
-.order-row .actions{display: flex; align-items: center; gap: 3px;}
-.order-row .actions button{padding: 2px 3px;}
+.tablehead {
+  border-bottom: 2px solid rgba(117, 86, 86, 0.1);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  color: #7d8faa;
+}
 
-.editbtn{background: var(--yellow); }
-/* .crossbtn{background: var(--lightred); } */
-.crossbtn{position: absolute; right: 0; top: 0; width: 34px; padding: 0; line-height: 34px;}
+.tablehead div, .order-row div {
+  /* Default alignment */
+}
+
+.tablehead .qty, .tablehead .total,
+.order-row .qty, .order-row .total {
+  text-align: center;
+}
+
+.tablehead .actions, .order-row .actions {
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.order-row {
+  padding: 10px 0;
+}
+
+.order-row .product p {
+  font-weight: 600;
+  color: var(--white);
+}
+
+.order-row .product span {
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.order-row .qty, .order-row .total {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.order-row .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.editbtn {
+  background: var(--yellow);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crossbtn {
+  background: var(--lightred);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .successfullybox{text-align: center;}
 .icon-wrapper {
@@ -1204,6 +1265,15 @@ margin:0;
 
 
 /* ---- Empty State ---- */
+.cro-table-head {
+  display: grid;
+  grid-template-columns: 2fr 0.6fr 0.9fr 0.7fr;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 4px;
+  margin-bottom: 4px;
+}
+
 .cro-table-head span {
   font-size: 12px;
   font-weight: 600;

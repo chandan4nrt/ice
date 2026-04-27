@@ -23,7 +23,9 @@ export const APIs = {
 
 
 
-  GET_VENDORS: "/api/v1/vendor",//Get All Vendor Details{Dropdown}
+
+
+  GET_RETAILERS: "/api/v1/retailer",//Get All Retailer Details{Dropdown}
   PRODUCT_DETAILS: "/api/v1/productdetails",//{Dropdown}
   CREATE_ORDER: "/api/v1/order",//Create retailer order{form}
 };
