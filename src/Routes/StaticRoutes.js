@@ -39,7 +39,7 @@ export const SIDEBAR_MENU = {
     // { id: 304, path: "/distributor/sales-person-management", component: "SalesPersonManagement", label: "Sales Person Management" },
     // { id: 305, path: "/distributor/product-management", component: "ProductManagement", label: "Product Management" },
     { id: 307, path: "/distributor/order-confirmation", component: "DistributorOrderConfirmation", label: "Order Confirmation" },
-    { id: 308, path: "/distributor/invoice/INV-001", component: "DistributorInvoicePage", label: "Invoice" },
+    { id: 308, path: "/distributor/invoice/:id", component: "DistributorInvoicePage", label: "Invoice" },
 
   ],
   SALESMAN: [
